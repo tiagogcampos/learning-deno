@@ -12,9 +12,9 @@ async function handler(request: Request) {
 }
 
 async function handlePost(request: Request) {
-  const contentType = request.headers.get("Content-Type");
+  const contentType = request.headers.get("Content-Type") || "";
   let body;
-  if (contentType?.includes("multipart/form-data")) {
+  if (contentType.includes("multipart/form-data")) {
     const formData = await request.formData();
     body = Object.fromEntries(formData);
   } else if (contentType?.includes("application/json")) {
